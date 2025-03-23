@@ -1,6 +1,6 @@
 # Next.js Middleware Vulnerability POC
 
-This project is a Proof of Concept (POC) for the article [**Critical Next.js Vulnerability: How a Simple Header Bypasses Authentication (CVE-2025-29927) 🕵️**](http://localhost:3000/blog/critical-nextjs-middleware-vulnerability-cve-2025-29927-authentication-bypass). It demonstrates how the [CVE-2025-29927](https://github.com/vercel/next.js/security/advisories/GHSA-f82v-jwr5-mffw) vulnerability can be exploited to bypass middleware authentication and authorization checks in a Next.js application.
+This project is a Proof of Concept (POC) for the article [**Critical Next.js Vulnerability: How a Simple Header Bypasses Authentication (CVE-2025-29927) 🕵️**](https://neoxs.me/blog/critical-nextjs-middleware-vulnerability-cve-2025-29927-authentication-bypass). It demonstrates how the [CVE-2025-29927](https://github.com/vercel/next.js/security/advisories/GHSA-f82v-jwr5-mffw) vulnerability can be exploited to bypass middleware authentication and authorization checks in a Next.js application.
 
 ## Description
 
